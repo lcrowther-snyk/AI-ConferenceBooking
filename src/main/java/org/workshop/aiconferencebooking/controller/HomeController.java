@@ -51,7 +51,9 @@ public class HomeController {
         //convert input to lowercase
         var lowerInput = input.toLowerCase();
         //search for talks with title or description containing the input
-        var query = em.createNativeQuery("select * from Talk t where lower(description) like '%" + lowerInput + "%' OR lower(title) like '%" + lowerInput + "%'", Talk.class);
+        var query = em.createNativeQuery("select * from Talk t where lower(description) like ? OR lower(title) like ?", Talk.class);
+        query.setParameter(1, "%" + lowerInput + "%");
+        query.setParameter(2, "%" + lowerInput + "%");
         var talks = (List<Talk>) query.getResultList();
         return talks;
     }
