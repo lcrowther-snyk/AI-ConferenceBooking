@@ -51,7 +51,9 @@ public class HomeController {
        //convert input to lowercase
         String lowerInput = input.toLowerCase();
         //create sql query
-        var query = em.createNativeQuery("SELECT * FROM Talk t WHERE LOWER(description) LIKE '%" + lowerInput + "%' OR LOWER(title) LIKE '%" + lowerInput + "%'", Talk.class);
+        var query = em.createNativeQuery("SELECT * FROM Talk t WHERE LOWER(description) LIKE ? OR LOWER(title) LIKE ?", Talk.class);
+        query.setParameter(1, "%" + lowerInput + "%");
+        query.setParameter(2, "%" + lowerInput + "%");
         //execute query and return results
         List<Talk> talks = (List<Talk>) query.getResultList();
         return talks;
