@@ -48,7 +48,10 @@ public class HomeController {
     }
 
     public List<Talk> searchTalk(String input) {
-       return null;
+       //create sql query to search for talks
+        String lowerInput = input.toLowerCase();
+        var query = em.createNativeQuery("SELECT * FROM Talk t WHERE LOWER(description) LIKE '%" + lowerInput + "%' OR LOWER(title) LIKE '%" + lowerInput + "%'", Talk.class);
+        return (List<Talk>) query.getResultList();
     }
 
 }
